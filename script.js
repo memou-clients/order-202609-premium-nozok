@@ -11,7 +11,7 @@ const PREMIUM_CONFIG = {
   "openingLine": "Ada sesuatu kecil yang aku bungkus khusus untuk kamu di hari spesial ini.",
   "heroSubtitle": "Hari ini semesta merayakan kehadiran seseorang yang paling istimewa.",
   "loveLetter": "Selamat ulang tahun untuk orang yang paling berharga di hidupku. Terima kasih sudah selalu hadir dengan senyum hangatmu, tawa bahagiamu, dan ketulusan hatimu. Bersamamu, hari-hari biasa berubah menjadi kenangan yang tak ternilai harganya. Di usiamu yang baru ini, aku berdoa semoga setiap langkahmu selalu dipenuhi keberkahan, impianmu tercapai satu per satu, dan hatimu selalu diliputi kebahagiaan yang tak pernah habis.",
-  "music": "assets/audio/theme.mp3",
+  "music": "https://music.youtube.com/watch?v=dlLdnd3VF-0&si=HF2EKT4sl-Q6xa80",
   "photoCaption1": "Awal dari cerita terbaik dalam hidupku ♡",
   "photoCaption2": "Senyum manismu yang selalu membuat hariku teduh",
   "photoCaption3": "Hari biasa yang jadi luar biasa karena ada kamu",
