@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Happy Birthday, My Love ✨</title>
+  
+  <!-- Google Fonts: Cormorant Garamond (luxury serif), Plus Jakarta Sans (clean modern sans), Great Vibes (calligraphy) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body class="envelope-locked">
+
+  <!-- ============================================================ -->
+  <!-- BACKGROUND AUDIO ELEMENT                                      -->
+  <!-- ============================================================ -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/theme.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ============================================================ -->
+  <!-- FLOATING PARTICLES CANVAS                                     -->
+  <!-- ============================================================ -->
+  <canvas id="particlesCanvas" class="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================ -->
+  <!-- FLOATING MUSIC HUD CONTROLLER                                 -->
+  <!-- ============================================================ -->
+  <aside class="music-hud" aria-label="Audio Controls">
+    <button id="musicToggle" class="music-toggle-btn" aria-label="Toggle Musik Latar" title="Putar / Hentikan Musik">
+      <div class="music-icon-wrap">
+        <svg class="icon-disk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+      <span class="music-waves" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span id="musicState" class="music-state-label">sound off</span>
+    </button>
+  </aside>
+
+  <!-- ============================================================ -->
+  <!-- ENTRANCE GIMMICK: INTERACTIVE LOVE ENVELOPE GATE             -->
+  <!-- ============================================================ -->
+  <section id="envelopeGate" class="envelope-overlay" aria-label="Amplop Cinta Pembuka">
+    <div class="envelope-container">
+      <div class="envelope-wrapper">
+        <div class="envelope-back"></div>
+        <div class="envelope-letter-preview">
+          <div class="preview-badge">Special Birthday Delivery</div>
+          <h2 class="preview-recipient" id="envelopeRecipientName">Adinda Putri</h2>
+          <p class="preview-note" id="openingLine">Ada sesuatu kecil yang aku bungkus khusus untuk kamu di hari spesial ini.</p>
+        </div>
+        <div class="envelope-left"></div>
+        <div class="envelope-right"></div>
+        <div class="envelope-bottom"></div>
+        <div class="envelope-top"></div>
+        
+        <!-- Wax Seal Button -->
+        <div class="wax-seal-wrapper">
+          <button id="openEnvelopeBtn" class="wax-seal-btn" aria-label="Buka Amplop Spesial">
+            <span class="seal-stamp">
+              <span class="seal-icon">♡</span>
+              <span class="seal-text">OPEN</span>
+            </span>
+          </button>
+          <div class="seal-pulse" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="envelope-hint">
+        <p>Sentuh segel hati untuk membuka surat rahasia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- MAIN EXPERIENCE CONTAINER (UNLOCKED AFTER ENVELOPE OPENS)    -->
+  <!-- ============================================================ -->
+  <main id="mainExperience" class="main-experience">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: HEADER / HERO BANNER                              -->
+    <!-- ============================================================ -->
+    <header class="section-hero" id="heroSection">
+      <div class="container hero-container">
+        
+        <div class="hero-header-badge">
+          <span class="sparkle-icon">✦</span>
+          <span class="badge-date" id="eventDate">14 Februari 2026</span>
+          <span class="sparkle-icon">✦</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-greeting">Happy Birthday,</span>
+          <span class="hero-recipient" id="recipientName">Adinda Putri</span>
+        </h1>
+
+        <div class="hero-nickname-wrap">
+          <span class="nickname-pill" id="nicknameDisplay">Princess of My Heart 👑</span>
+        </div>
+
+        <p class="hero-subtitle" id="heroSubtitle">
+          Hari ini semesta merayakan kehadiran seseorang yang paling istimewa.
+        </p>
+
+        <!-- Hero Photo Frame with Luxury Golden Halo -->
+        <div class="hero-photo-wrapper">
+          <div class="hero-photo-halo" aria-hidden="true"></div>
+          <div class="hero-photo-card">
+            <img 
+              src="assets/images/hero_cover.jpg" 
+              alt="Foto Utama Header" 
+              id="heroImage" 
+              class="hero-photo" 
+              loading="eager"
+            />
+            <div class="photo-shimmer" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <a href="#letterSection" class="scroll-cue" aria-label="Scroll ke Surat Cinta">
+          <span class="scroll-text">Buka Cerita Kita</span>
+          <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+          </svg>
+        </a>
+
+      </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: SURAT MEWAH (LOVE LETTER PARCHMENT CARD)          -->
+    <!-- ============================================================ -->
+    <section class="section-letter" id="letterSection" aria-labelledby="letterHeading">
+      <div class="container letter-container">
+        
+        <div class="parchment-card">
+          <div class="parchment-corner top-left" aria-hidden="true"></div>
+          <div class="parchment-corner top-right" aria-hidden="true"></div>
+          <div class="parchment-corner bottom-left" aria-hidden="true"></div>
+          <div class="parchment-corner bottom-right" aria-hidden="true"></div>
+
+          <header class="letter-header">
+            <span class="letter-kicker">A Letter From The Heart</span>
+            <h2 id="letterHeading" class="letter-title">Untuk Kamu yang Selalu Berharga</h2>
+            <div class="letter-meta">
+              <span class="letter-date-tag" id="letterDate">14 Februari 2026</span>
+            </div>
+            <div class="letter-divider" aria-hidden="true">
+              <span>❧</span>
+            </div>
+          </header>
+
+          <div class="letter-body" id="fullLetterBody">
+            <p id="letterText">
+              Selamat ulang tahun untuk orang yang paling berharga di hidupku. Terima kasih sudah selalu hadir dengan senyum hangatmu, tawa bahagiamu, dan ketulusan hatimu. Bersamamu, hari-hari biasa berubah menjadi kenangan yang tak ternilai harganya. Di usiamu yang baru ini, aku berdoa semoga setiap langkahmu selalu dipenuhi keberkahan, impianmu tercapai satu per satu, dan hatimu selalu diliputi kebahagiaan yang tak pernah habis.
+            </p>
+          </div>
+
+          <footer class="letter-footer">
+            <p class="letter-closing">Tertanda dengan seluruh rasa sayang,</p>
+            <p class="letter-signature" id="senderName">Rizky Ramadhan</p>
+          </footer>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: SCRAPBOOK POLAROID (7 FOTO POLAROID + CAPTIONS)   -->
+    <!-- ============================================================ -->
+    <section class="section-scrapbook" id="scrapbookSection" aria-labelledby="scrapbookTitle">
+      <div class="container scrapbook-container">
+        
+        <div class="section-header-center">
+          <span class="section-tag">Memory Lane</span>
+          <h2 id="scrapbookTitle" class="section-heading">Our Beautiful Scrapbook</h2>
+          <p class="section-desc">Kumpulan potret momen manis yang selalu membuatku bersyukur memiliki kamu.</p>
+        </div>
+
+        <div class="polaroid-grid">
+
+          <!-- Polaroid 1 -->
+          <article class="polaroid-card tilt-left" data-polaroid-index="1">
+            <div class="tape-strip tape-top" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_1.jpg" alt="Polaroid Kenangan 1" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 1">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption1">Awal dari cerita terbaik dalam hidupku ♡</p>
+                <span class="polaroid-number">#01</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 2 -->
+          <article class="polaroid-card tilt-right" data-polaroid-index="2">
+            <div class="tape-strip tape-top-right" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_2.jpg" alt="Polaroid Kenangan 2" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption2">Senyum manismu yang selalu membuat hariku teduh</p>
+                <span class="polaroid-number">#02</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 3 -->
+          <article class="polaroid-card tilt-center" data-polaroid-index="3">
+            <div class="tape-strip tape-top" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_3.jpg" alt="Polaroid Kenangan 3" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 3">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption3">Hari biasa yang jadi luar biasa karena ada kamu</p>
+                <span class="polaroid-number">#03</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 4 -->
+          <article class="polaroid-card tilt-right" data-polaroid-index="4">
+            <div class="tape-strip tape-top-left" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_4.jpg" alt="Polaroid Kenangan 4" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 4">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption4">Tawa lepas yang paling aku rindukan setiap saat</p>
+                <span class="polaroid-number">#04</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 5 -->
+          <article class="polaroid-card tilt-left" data-polaroid-index="5">
+            <div class="tape-strip tape-top" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_5.jpg" alt="Polaroid Kenangan 5" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption5">Momen sederhana, tapi rasanya begitu mendalam</p>
+                <span class="polaroid-number">#05</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 6 -->
+          <article class="polaroid-card tilt-right" data-polaroid-index="6">
+            <div class="tape-strip tape-top-right" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_6.jpg" alt="Polaroid Kenangan 6" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 6">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption6">Kenangan berharga yang akan selalu aku simpan rapi</p>
+                <span class="polaroid-number">#06</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Polaroid 7 (Featured Span) -->
+          <article class="polaroid-card tilt-center polaroid-featured" data-polaroid-index="7">
+            <div class="tape-strip tape-top" aria-hidden="true"></div>
+            <div class="polaroid-inner">
+              <div class="polaroid-media">
+                <img src="assets/images/polaroid_7.jpg" alt="Polaroid Kenangan 7" loading="lazy" />
+                <button class="zoom-btn" aria-label="Perbesar Foto 7">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+              </div>
+              <div class="polaroid-footer">
+                <p class="polaroid-caption photo-caption" id="photoCaption7">Dan aku akan selalu memilih berjalan bersamamu ✨</p>
+                <span class="polaroid-number">#07 • Forever</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: MAKE A WISH (TIUP LILIN & CELEBRATORY CONFETTI)   -->
+    <!-- ============================================================ -->
+    <section class="section-wish" id="wishSection" aria-labelledby="wishHeading">
+      <div class="container wish-container">
+        
+        <div class="section-header-center">
+          <span class="section-tag">Birthday Ritual</span>
+          <h2 id="wishHeading" class="section-heading">Make a Wish & Blow The Candle! 🎂</h2>
+          <p class="section-desc">Pejamkan matamu sejenak, ucapkan doa terbaik di dalam hati, lalu tiup lilin ini.</p>
+        </div>
+
+        <div class="cake-ceremony-card">
+          
+          <!-- Cake & Candle Visual -->
+          <div class="cake-stage">
+            <div class="cake-sparkle-field" aria-hidden="true"></div>
+            
+            <div class="cake-assembly">
+              
+              <!-- Candle on top -->
+              <div class="candle-wrapper">
+                <div class="candle-flame-wrap">
+                  <div class="flame" id="candleFlame"></div>
+                  <div class="flame-glow" id="flameGlow" aria-hidden="true"></div>
+                  <div class="smoke" id="candleSmoke" aria-hidden="true"></div>
+                </div>
+                <div class="candle-wick"></div>
+                <div class="candle-stick">
+                  <div class="candle-stripe"></div>
+                </div>
+              </div>
+
+              <!-- Cake Tiers -->
+              <div class="cake-tier tier-top">
+                <div class="cake-frosting-drips">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="cake-cherries">
+                  <span class="cherry">🍒</span>
+                  <span class="cherry">🍓</span>
+                  <span class="cherry">🍒</span>
+                </div>
+              </div>
+
+              <div class="cake-tier tier-bottom">
+                <div class="cake-cream-swirls">
+                  <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="cake-plate"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Action Control -->
+          <div class="wish-action-area">
+            <button id="blowCandleBtn" class="btn-blow-candle">
+              <span class="btn-blow-icon">💨</span>
+              <span class="btn-blow-text">Tiup Lilin & Rayakan!</span>
+            </button>
+            <p class="wish-hint-text">Tekan tombol saat kamu sudah selesai memanjatkan doamu</p>
+          </div>
+
+          <!-- Revealed Wish Granted Card (Shown after candle is blown) -->
+          <div id="wishGrantedCard" class="wish-granted-card hidden" aria-live="polite">
+            <div class="wish-card-icon">🎉</div>
+            <h3 class="wish-card-title">Doa Tulus Telah Terkirim!</h3>
+            <p class="wish-card-message" id="wishSuccess">
+              Doamu telah terkirim ke langit. Semoga semesta mengabulkan setiap harapan terbaik di hatimu dengan penuh kelembutan. Selamat ulang tahun, cintaku! ♡
+            </p>
+            <div class="wish-card-sparkles" aria-hidden="true">✨ 💖 ✨</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER SECTION                                               -->
+    <!-- ============================================================ -->
+    <footer class="section-footer">
+      <div class="container footer-container">
+        <div class="footer-heart-symbol">♡</div>
+        <p class="footer-quote">"In all the world, there is no heart for me like yours."</p>
+        <p class="footer-credit" id="footerCreditText">
+          Crafted with endless love by <strong id="footerSender">Rizky Ramadhan</strong> for <strong id="footerRecipient">Adinda Putri</strong>
+        </p>
+        <span class="footer-brand">MEMOu Studio Premium Experience</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- POLAROID LIGHTBOX MODAL (FOR ENHANCED MOBILE/DESKTOP VIEW)   -->
+  <!-- ============================================================ -->
+  <dialog id="polaroidLightbox" class="polaroid-lightbox" aria-label="Pratinjau Foto Memori">
+    <div class="lightbox-content">
+      <button id="closeLightboxBtn" class="lightbox-close-btn" aria-label="Tutup Pratinjau">✕</button>
+      <div class="lightbox-polaroid">
+        <div class="lightbox-img-wrap">
+          <img id="lightboxImg" src="" alt="Pratinjau Foto" />
+        </div>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+        <span id="lightboxIndex" class="lightbox-index"></span>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                      -->
+  <!-- ============================================================ -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
